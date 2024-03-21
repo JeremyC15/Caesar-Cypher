@@ -1,0 +1,38 @@
+alpha = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S']
+alpha.extend(['T', 'U', 'V', 'W', 'X', 'Y', 'Z'])
+
+key = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T']
+key.extend(['U', 'V', 'W', 'X', 'Y', 'Z'])
+
+
+def getKey():
+  global key
+  global shift
+  shift = input('What is the shift value? ')
+  while not shift.isdigit():
+    shift = input('Invalid input. What is the shift value? ')
+  shift = int(shift)
+
+  for i in range(0, shift):
+    key.insert(0, key[len(key) - 1])
+    key.pop(-1)
+
+
+def decrypt():
+  message = input("Enter the message: ")
+  message = message.upper()
+
+  global AlphaList
+  AlphaList = []
+  for x in message:
+    AlphaList.append(x)
+
+  for i in range(0, len(AlphaList)):
+    AlphaList[i] = alpha.index(AlphaList[i])
+    AlphaList[i] = key[AlphaList[i]]
+    
+  decrypted = ''.join(AlphaList)
+  print('\n' + decrypted)
+
+getKey()
+decrypt()
